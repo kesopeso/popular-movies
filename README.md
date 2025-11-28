@@ -46,3 +46,4 @@ bin/cmd.sh npm install
 
 - bootstrapped the application with npx create-next-app@latest
 - added basic docker workflow files
+- added prettier for consistent formatting
