@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Popular movies app
+
+This application is a simple movie browser built using
+The Movie Database (TMDb) API. It displays a list of currently popular movies
+on the home page, with a search bar at the top for quickly finding a specific
+title within the available results.
+
+Clicking on any movie opens a dedicated details page, where additional
+information about the selected film is shown, such as its description, release
+date, rating, and more.
+
+In short, the app provides a clean and minimal way to explore popular movies and
+view detailed information about each one.
 
 ## Getting Started
 
-First, run the development server:
+This project is dockerized. Commands that affect the project files should be
+run via bin/cmd.sh file. If you don't want to use docker, just make sure you
+have node v25.2.1 (this is the version used for development of this project) or
+above installed.
+
+Cd into the project's root folder and use the following commands for the development:
+
+- starting the development server
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bin/start-dev.sh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- stopping the development server
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+bin/stop-dev.sh
+```
 
-## Learn More
+- executing a command via docker container (npm install is just an example command)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+bin/cmd.sh npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development process
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- bootstrapped the application with npx create-next-app@latest
+- added basic docker workflow files

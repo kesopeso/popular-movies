@@ -1,0 +1,11 @@
+services:
+  popular_movies:
+    image: node:25.2.1-alpine3.22
+    container_name: popular_movies
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: ["npm", "run", "dev"]
