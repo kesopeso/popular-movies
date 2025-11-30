@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeToggler } from '@/components/theme-toggler';
 import './globals.css';
+import { Container } from '@/components/ui/container';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -34,8 +35,12 @@ export default function RootLayout({
                     defaultTheme="system"
                     enableSystem={true}
                 >
-                    <ThemeToggler />
-                    {children}
+                    <Container>
+                        <div className="mt-2 text-right md:mt-5">
+                            <ThemeToggler />
+                        </div>
+                        {children}
+                    </Container>
                 </ThemeProvider>
             </body>
         </html>
