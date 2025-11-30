@@ -4,5 +4,7 @@
   "singleQuote": true,
   "printWidth": 80,
   "tabWidth": 4,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/app/globals.css"
 }

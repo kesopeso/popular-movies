@@ -1,6 +1,7 @@
 node_modules
 build
 dist
+.prettierrc.json
 components.json
 eslint.config.mjs
 next-env.d.ts
