@@ -1,6 +1,7 @@
 node_modules
 build
 dist
+components.json
 eslint.config.mjs
 next-env.d.ts
 next.config.ts

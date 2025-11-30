@@ -47,3 +47,4 @@ bin/cmd.sh npm install
 - bootstrapped the application with npx create-next-app@latest
 - added basic docker workflow files
 - added prettier for consistent formatting
+- added first shadcn components using npx shadcn@latest add \<some_component\>
