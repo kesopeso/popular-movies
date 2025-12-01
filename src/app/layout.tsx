@@ -31,10 +31,10 @@ export default function RootLayout({
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="system"
+                    defaultTheme="dark"
                     enableSystem={true}
                 >
-                    <div className="container mx-auto mb-36 p-2 md:p-5">
+                    <div className="container mx-auto mb-36 min-h-screen p-2 md:p-5">
                         <div className="mb-2 text-right md:mb-5">
                             <ThemeToggler />
                         </div>

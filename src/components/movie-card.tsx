@@ -30,11 +30,11 @@ function MovieCard({
         .join(' / ');
 
     return (
-        <Link href={`/movies/${id}`} className="group">
+        <Link href={`/movies/${id}`} className="group mx-4 sm:mx-0">
             <Card className="transition-transform duration-300 group-hover:scale-105 group-hover:border-primary/50 group-hover:shadow-xl group-hover:shadow-primary/10">
-                <div className="relative aspect-[3/2] overflow-hidden bg-gradient-to-t from-background/90 via-transparent to-transparent transition-all sm:aspect-[2/3]">
+                <div className="relative aspect-[3/2] overflow-hidden bg-gradient-to-t from-primary/10 to-transparent transition-all sm:aspect-[2/3]">
                     <Image
-                        className="transition-transform duration-300 group-hover:scale-110 sm:object-cover"
+                        className="object-contain object-center transition-transform duration-300 group-hover:scale-110"
                         src={posterUrl}
                         alt={title}
                         fill={true}
