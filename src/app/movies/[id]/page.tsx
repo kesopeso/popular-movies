@@ -1,0 +1,68 @@
+import { BackButton } from '@/components/back-button';
+import { BackdropHeaderImage } from '@/components/backdrop-header-image';
+import { ThemeToggler } from '@/components/theme-toggler';
+import { Badge } from '@/components/ui/badge';
+import { getBackdropUrl } from '@/repositories/images-repository';
+import { getMovieById } from '@/repositories/movie-repository';
+
+type MovieDetailsProps = {
+    params: Promise<{ id: number }>;
+};
+
+export default async function MovieDetails({ params }: MovieDetailsProps) {
+    const { id } = await params;
+    const [movieDetails, err] = await getMovieById(id);
+
+    const backdropUrl = !!movieDetails
+        ? getBackdropUrl(movieDetails.backdrop_path)
+        : undefined;
+
+    return (
+        <>
+            <div className="relative">
+                {!!backdropUrl && (
+                    <BackdropHeaderImage imageUrl={backdropUrl} />
+                )}
+
+                <div className="container mx-auto p-2 md:p-5">
+                    <div className="mb-2 flex w-full justify-between md:mb-5">
+                        <BackButton />
+                        <ThemeToggler />
+                    </div>
+
+                    {!!err ? (
+                        <div>Error occured: {err}</div>
+                    ) : !movieDetails ? (
+                        <div>Movie details not found</div>
+                    ) : (
+                        <>
+                            <header className="pt-36 pb-12">
+                                <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                                    {movieDetails.title}
+                                </h1>
+
+                                {!!movieDetails.tagline && (
+                                    <p className="mt-2 text-muted-foreground">
+                                        {movieDetails.tagline}
+                                    </p>
+                                )}
+
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                    {movieDetails.genres.map((g) => (
+                                        <Badge key={g.id} variant="genre">
+                                            {g.name}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            </header>
+                        </>
+                    )}
+                </div>
+            </div>
+
+            <div className="container mx-auto mb-36 p-2 md:p-5">
+                {JSON.stringify(movieDetails)}
+            </div>
+        </>
+    );
+}

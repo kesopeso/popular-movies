@@ -17,3 +17,13 @@ export function getPosterUrl(imagePath: string) {
     const pathSeparator = imagePath.startsWith('/') ? '' : '/';
     return `${baseUrl}${imageSize}${pathSeparator}${imagePath}`;
 }
+
+export function getBackdropUrl(imagePath: string) {
+    const baseUrl = imagesConfiguration.secure_base_url;
+    const imageSize =
+        imagesConfiguration.backdrop_sizes[
+            imagesConfiguration.backdrop_sizes.length - 2
+        ];
+    const pathSeparator = imagePath.startsWith('/') ? '' : '/';
+    return `${baseUrl}${imageSize}${pathSeparator}${imagePath}`;
+}

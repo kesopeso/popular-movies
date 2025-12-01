@@ -39,7 +39,10 @@ function MovieCard({
                         alt={title}
                         fill={true}
                     />
-                    <Badge className="absolute top-2 right-2 max-w-9/10 bg-primary text-primary-foreground">
+                    <Badge
+                        variant="genre"
+                        className="absolute top-2 right-2 max-w-9/10"
+                    >
                         <span className="truncate">{genre}</span>
                     </Badge>
                 </div>
