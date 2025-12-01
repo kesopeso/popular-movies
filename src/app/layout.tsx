@@ -34,7 +34,7 @@ export default function RootLayout({
                     defaultTheme="system"
                     enableSystem={true}
                 >
-                    <div className="container mx-auto p-2 md:p-5">
+                    <div className="container mx-auto mb-36 p-2 md:p-5">
                         <div className="mb-2 text-right md:mb-5">
                             <ThemeToggler />
                         </div>
