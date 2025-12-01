@@ -48,3 +48,4 @@ bin/cmd.sh npm install
 - added basic docker workflow files
 - added prettier for consistent formatting
 - added first shadcn components using npx shadcn@latest add \<some_component\>
+- worked on html by adding new components and used mocked data to display the components
