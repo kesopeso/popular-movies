@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeToggler } from '@/components/theme-toggler';
 import './globals.css';
 
 const geistSans = Geist({
@@ -34,12 +33,7 @@ export default function RootLayout({
                     defaultTheme="dark"
                     enableSystem={true}
                 >
-                    <div className="container mx-auto mb-36 min-h-screen p-2 md:p-5">
-                        <div className="mb-2 text-right md:mb-5">
-                            <ThemeToggler />
-                        </div>
-                        {children}
-                    </div>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>

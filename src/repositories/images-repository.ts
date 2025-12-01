@@ -9,5 +9,11 @@ const imagesConfiguration = {
 };
 
 export function getPosterUrl(imagePath: string) {
-    return `${imagesConfiguration.secure_base_url}${imagesConfiguration.poster_sizes[imagesConfiguration.poster_sizes.length - 1]}${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
+    const baseUrl = imagesConfiguration.secure_base_url;
+    const imageSize =
+        imagesConfiguration.poster_sizes[
+            imagesConfiguration.poster_sizes.length - 2
+        ];
+    const pathSeparator = imagePath.startsWith('/') ? '' : '/';
+    return `${baseUrl}${imageSize}${pathSeparator}${imagePath}`;
 }
