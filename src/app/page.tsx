@@ -1,7 +1,12 @@
 import { MovieGrid } from '@/components/movie-grid';
 import { SearchBar } from '@/components/search-bar';
+import { getPopularMovies } from '@/repositories/movie-repository';
 
-export default function Home() {
+export default async function Home() {
+    const [movies, err] = await getPopularMovies();
+    console.log('this is the result', movies, err);
+    console.log('result');
+
     return (
         <main>
             <header className="mb-12 text-center">
@@ -23,7 +28,11 @@ export default function Home() {
                     Popular Movies
                 </h2>
 
-                <MovieGrid />
+                {!!movies ? (
+                    <MovieGrid movies={movies.results} />
+                ) : (
+                    <div>TODO - load movies error occured. {err}</div>
+                )}
             </section>
         </main>
     );

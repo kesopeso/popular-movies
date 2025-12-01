@@ -3,16 +3,34 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Star } from 'lucide-react';
+import { getPosterUrl } from '@/repositories/images-repository';
+import { getGenreNameById } from '@/repositories/genres-repository';
 
-function MovieCard() {
-    const posterUrl = '/poster.jpg';
-    const title = 'Movie title';
-    const genre = 'Action';
-    const year = 2024;
-    const rating = 9.3;
+type MovieCardProps = {
+    id: number;
+    posterPath: string;
+    title: string;
+    genres: number[];
+    year: number;
+    rating: number;
+};
+
+function MovieCard({
+    id,
+    posterPath,
+    title,
+    genres,
+    year,
+    rating,
+}: MovieCardProps) {
+    const posterUrl = getPosterUrl(posterPath);
+    const genre = genres
+        .map((g) => getGenreNameById(g))
+        .filter((g) => !!g)
+        .join(' / ');
 
     return (
-        <Link href="/" className="group">
+        <Link href={`/movies/${id}`} className="group">
             <Card className="transition-transform duration-300 group-hover:scale-105 group-hover:border-primary/50 group-hover:shadow-xl group-hover:shadow-primary/10">
                 <div className="relative aspect-[3/2] overflow-hidden bg-gradient-to-t from-background/90 via-transparent to-transparent transition-all sm:aspect-[2/3]">
                     <Image
@@ -21,8 +39,8 @@ function MovieCard() {
                         alt={title}
                         fill={true}
                     />
-                    <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">
-                        {genre}
+                    <Badge className="absolute top-2 right-2 max-w-9/10 bg-primary text-primary-foreground">
+                        <span className="truncate">{genre}</span>
                     </Badge>
                 </div>
                 <CardContent>

@@ -49,3 +49,5 @@ bin/cmd.sh npm install
 - added prettier for consistent formatting
 - added first shadcn components using npx shadcn@latest add \<some_component\>
 - worked on html by adding new components and used mocked data to display the components
+- added data access and basic movies retrieval from the api - no security
+checks, error handling, rate limiting, nothing! (this is to test the visuals)
