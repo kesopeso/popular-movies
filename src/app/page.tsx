@@ -6,6 +6,10 @@ import { getPopularMovies } from '@/repositories/movie-repository';
 export default async function Home() {
     const [movies, err] = await getPopularMovies();
 
+    if (!!err) {
+        throw err;
+    }
+
     return (
         <div className="container mx-auto mb-36 p-2 md:p-5">
             <div className="mb-2 text-right md:mb-5">
@@ -31,13 +35,7 @@ export default async function Home() {
                     Popular Movies
                 </h2>
 
-                {!!err ? (
-                    <div>Error occured: {err.message}</div>
-                ) : !movies ? (
-                    <div>No movies found</div>
-                ) : (
-                    <MovieGrid movies={movies} />
-                )}
+                <MovieGrid movies={movies} />
             </section>
         </div>
     );
