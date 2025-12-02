@@ -31,7 +31,7 @@ export default async function MovieDetails({ params }: MovieDetailsProps) {
                     </div>
 
                     {!!err ? (
-                        <div>Error occured: {err}</div>
+                        <div>Error occured: {err.message}</div>
                     ) : !movieDetails ? (
                         <div>Movie details not found</div>
                     ) : (

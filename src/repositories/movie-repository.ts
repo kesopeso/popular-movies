@@ -122,19 +122,19 @@ function fetchFromTmdbApi(path: string) {
 
 export async function getMovieById(
     id: number,
-): Promise<[MovieDetails, null] | [null, unknown]> {
+): Promise<[MovieDetails, null] | [null, Error]> {
     try {
         const response = await fetchFromTmdbApi(`/movie/${id}`);
         const responseJson = await response.json();
         const movieResponse = MovieDetailsResponseSchema.parse(responseJson);
         return [movieResponse, null];
     } catch (err) {
-        return [null, err];
+        return [null, err as Error];
     }
 }
 
 export async function getPopularMovies(): Promise<
-    [MovieInfo[], null] | [null, unknown]
+    [MovieInfo[], null] | [null, Error]
 > {
     try {
         const response = await fetchFromTmdbApi(
@@ -144,6 +144,6 @@ export async function getPopularMovies(): Promise<
         const moviesResponse = MoviesInfoResponseSchema.parse(responseJson);
         return [moviesResponse.results, null];
     } catch (err) {
-        return [null, err];
+        return [null, err as Error];
     }
 }

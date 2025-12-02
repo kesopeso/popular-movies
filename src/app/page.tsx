@@ -32,7 +32,7 @@ export default async function Home() {
                 </h2>
 
                 {!!err ? (
-                    <div>Error occured: {err}</div>
+                    <div>Error occured: {err.message}</div>
                 ) : !movies ? (
                     <div>No movies found</div>
                 ) : (
