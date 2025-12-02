@@ -1,6 +1,6 @@
 import { tmdbApiAuthToken, tmdbApiBaseUrl } from '@/lib/env';
 import { getGenreNameById } from '@/repositories/genres-repository';
-import { getPosterUrl } from '@/repositories/images-repository';
+import { getBackdropUrl, getPosterUrl } from '@/repositories/images-repository';
 import z from 'zod';
 
 const MovieInfoResponseSchema = z.object({
@@ -119,7 +119,16 @@ export type MovieInfo = {
     year: number;
 };
 
-export type MovieDetails = z.infer<typeof MovieDetailsResponseSchema>;
+export type MovieDetails = {
+    id: number;
+    title: string;
+    backdropUrl: string;
+    tagline: string;
+    genres: {
+        id: number;
+        name: string;
+    }[];
+};
 
 export async function getMovieById(
     id: number,
@@ -128,7 +137,16 @@ export async function getMovieById(
         const response = await fetchFromTmdbApi(`/movie/${id}`);
         const responseJson = await response.json();
         const movieResponse = MovieDetailsResponseSchema.parse(responseJson);
-        return [movieResponse, null];
+        const movie = {
+            id: movieResponse.id,
+            title: movieResponse.title,
+            backdropUrl: getBackdropUrl(movieResponse.backdrop_path),
+            tagline:
+                movieResponse.tagline ||
+                `${movieResponse.overview.substring(0, 50)}...`,
+            genres: movieResponse.genres,
+        };
+        return [movie, null];
     } catch (err) {
         return [null, err as Error];
     }

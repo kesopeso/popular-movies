@@ -2,7 +2,6 @@ import { BackButton } from '@/components/back-button';
 import { MovieHeaderBackdrop } from '@/components/movie-details/movie-header-backdrop';
 import { ThemeToggler } from '@/components/theme/theme-toggler';
 import { Badge } from '@/components/ui/badge';
-import { getBackdropUrl } from '@/repositories/images-repository';
 import { getMovieById } from '@/repositories/movie-repository';
 
 type MovieDetailsProps = {
@@ -13,15 +12,11 @@ export default async function MovieDetails({ params }: MovieDetailsProps) {
     const { id } = await params;
     const [movieDetails, err] = await getMovieById(id);
 
-    const backdropUrl = !!movieDetails
-        ? getBackdropUrl(movieDetails.backdrop_path)
-        : undefined;
-
     return (
         <>
             <div className="relative">
-                {!!backdropUrl && (
-                    <MovieHeaderBackdrop imageUrl={backdropUrl} />
+                {!!movieDetails?.backdropUrl && (
+                    <MovieHeaderBackdrop imageUrl={movieDetails.backdropUrl} />
                 )}
 
                 <div className="container mx-auto p-2 md:p-5">
@@ -41,11 +36,9 @@ export default async function MovieDetails({ params }: MovieDetailsProps) {
                                     {movieDetails.title}
                                 </h1>
 
-                                {!!movieDetails.tagline && (
-                                    <p className="mt-2 text-muted-foreground">
-                                        {movieDetails.tagline}
-                                    </p>
-                                )}
+                                <p className="mt-2 text-muted-foreground">
+                                    {movieDetails.tagline}
+                                </p>
 
                                 <div className="mt-2 flex flex-wrap gap-2">
                                     {movieDetails.genres.map((g) => (
