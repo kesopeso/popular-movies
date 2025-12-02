@@ -1,6 +1,6 @@
-import { MovieGrid } from '@/components/movie-grid';
+import { MovieGrid } from '@/components/movies-list/movie-grid';
 import { SearchBar } from '@/components/search-bar';
-import { ThemeToggler } from '@/components/theme-toggler';
+import { ThemeToggler } from '@/components/theme/theme-toggler';
 import { getPopularMovies } from '@/repositories/movie-repository';
 
 export default async function Home() {

@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-type BackdropHeaderImageProps = {
+type MovieHeaderBackdropProps = {
     imageUrl: string;
 };
 
-function BackdropHeaderImage({ imageUrl }: BackdropHeaderImageProps) {
+function MovieHeaderBackdrop({ imageUrl }: MovieHeaderBackdropProps) {
     return (
         <>
             <div className="absolute inset-0 -z-1">
@@ -20,4 +20,4 @@ function BackdropHeaderImage({ imageUrl }: BackdropHeaderImageProps) {
     );
 }
 
-export { BackdropHeaderImage };
+export { MovieHeaderBackdrop };

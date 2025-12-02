@@ -3,32 +3,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Star } from 'lucide-react';
-import { getPosterUrl } from '@/repositories/images-repository';
-import { getGenreNameById } from '@/repositories/genres-repository';
+import { MovieInfo } from '@/repositories/movie-repository';
 
 type MovieCardProps = {
-    id: number;
-    posterPath: string;
-    title: string;
-    genres: number[];
-    year: number;
-    rating: number;
+    movie: MovieInfo;
 };
 
 function MovieCard({
-    id,
-    posterPath,
-    title,
-    genres,
-    year,
-    rating,
+    movie: { id, posterUrl, title, genres, year, rating },
 }: MovieCardProps) {
-    const posterUrl = getPosterUrl(posterPath);
-    const genre = genres
-        .map((g) => getGenreNameById(g))
-        .filter((g) => !!g)
-        .join(' / ');
-
     return (
         <Link href={`/movies/${id}`} className="group mx-4 sm:mx-0">
             <Card className="transition-transform duration-300 group-hover:scale-105 group-hover:border-primary/50 group-hover:shadow-xl group-hover:shadow-primary/10">
@@ -43,7 +26,7 @@ function MovieCard({
                         variant="genre"
                         className="absolute top-2 right-2 max-w-9/10"
                     >
-                        <span className="truncate">{genre}</span>
+                        <span className="truncate">{genres.join(' / ')}</span>
                     </Badge>
                 </div>
                 <CardContent>

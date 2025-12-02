@@ -1,6 +1,6 @@
 import { BackButton } from '@/components/back-button';
-import { BackdropHeaderImage } from '@/components/backdrop-header-image';
-import { ThemeToggler } from '@/components/theme-toggler';
+import { MovieHeaderBackdrop } from '@/components/movie-details/movie-header-backdrop';
+import { ThemeToggler } from '@/components/theme/theme-toggler';
 import { Badge } from '@/components/ui/badge';
 import { getBackdropUrl } from '@/repositories/images-repository';
 import { getMovieById } from '@/repositories/movie-repository';
@@ -21,7 +21,7 @@ export default async function MovieDetails({ params }: MovieDetailsProps) {
         <>
             <div className="relative">
                 {!!backdropUrl && (
-                    <BackdropHeaderImage imageUrl={backdropUrl} />
+                    <MovieHeaderBackdrop imageUrl={backdropUrl} />
                 )}
 
                 <div className="container mx-auto p-2 md:p-5">

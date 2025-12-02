@@ -1,4 +1,6 @@
 import { tmdbApiAuthToken, tmdbApiBaseUrl } from '@/lib/env';
+import { getGenreNameById } from '@/repositories/genres-repository';
+import { getPosterUrl } from '@/repositories/images-repository';
 import z from 'zod';
 
 const MovieInfoResponseSchema = z.object({
@@ -108,17 +110,16 @@ const MovieDetailsResponseSchema = z.object({
     vote_count: z.number().int(),
 });
 
-export type MovieInfo = z.infer<typeof MovieInfoResponseSchema>;
+export type MovieInfo = {
+    id: number;
+    title: string;
+    posterUrl: string;
+    genres: string[];
+    rating: number;
+    year: number;
+};
 
 export type MovieDetails = z.infer<typeof MovieDetailsResponseSchema>;
-
-function fetchFromTmdbApi(path: string) {
-    return fetch(`${tmdbApiBaseUrl}${path}`, {
-        headers: {
-            Authorization: `Bearer ${tmdbApiAuthToken}`,
-        },
-    });
-}
 
 export async function getMovieById(
     id: number,
@@ -142,8 +143,26 @@ export async function getPopularMovies(): Promise<
         );
         const responseJson = await response.json();
         const moviesResponse = MoviesInfoResponseSchema.parse(responseJson);
-        return [moviesResponse.results, null];
+        const movies = moviesResponse.results.map((m) => ({
+            id: m.id,
+            title: m.title,
+            posterUrl: getPosterUrl(m.poster_path),
+            genres: m.genre_ids
+                .map((gId) => getGenreNameById(gId))
+                .filter((g): g is string => !!g),
+            rating: m.vote_average,
+            year: m.release_date.getFullYear(),
+        }));
+        return [movies, null];
     } catch (err) {
         return [null, err as Error];
     }
+}
+
+function fetchFromTmdbApi(path: string) {
+    return fetch(`${tmdbApiBaseUrl}${path}`, {
+        headers: {
+            Authorization: `Bearer ${tmdbApiAuthToken}`,
+        },
+    });
 }
