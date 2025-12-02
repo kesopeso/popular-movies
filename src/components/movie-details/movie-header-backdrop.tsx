@@ -15,6 +15,7 @@ function MovieHeaderBackdrop({ imageUrl }: MovieHeaderBackdropProps) {
                     fill={true}
                 />
             </div>
+
             <div className="absolute inset-0 -z-1 bg-gradient-to-t from-background from-10% to-background/30 to-90%" />
         </>
     );

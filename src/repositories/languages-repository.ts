@@ -936,8 +936,8 @@ const languages = [
     },
 ];
 
-export function getLanguageEnglishNameByIsoCode(iso: string) {
-    iso = iso.toLowerCase();
-    const language = languages.find((l) => l.iso_639_1 === iso);
+export function getLanguageEnglishNameByIsoCode(isoCode: string) {
+    isoCode = isoCode.toLowerCase();
+    const language = languages.find((l) => l.iso_639_1 === isoCode);
     return language?.english_name;
 }

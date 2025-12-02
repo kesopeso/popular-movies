@@ -1,4 +1,6 @@
 import { tmdbApiAuthToken, tmdbApiBaseUrl } from '@/lib/env';
+import { formatCurrency, formatDate } from '@/lib/i18n';
+import { formatMinutes } from '@/lib/time';
 import { getGenreNameById } from '@/repositories/genres-repository';
 import { getBackdropUrl, getPosterUrl } from '@/repositories/images-repository';
 import z from 'zod';
@@ -128,6 +130,23 @@ export type MovieDetails = {
         id: number;
         name: string;
     }[];
+    rating: number;
+    votes: number;
+    year: number;
+    runtime: string;
+    originalLanguage: string;
+    overview: string;
+    budget: string;
+    revenue: string;
+    productionCompanies: {
+        id: number;
+        name: string;
+        originCountry: string;
+    }[];
+    status: string;
+    originalTitle: string;
+    releaseDate: string;
+    homepage: string;
 };
 
 export async function getMovieById(
@@ -137,7 +156,8 @@ export async function getMovieById(
         const response = await fetchFromTmdbApi(`/movie/${id}`);
         const responseJson = await response.json();
         const movieResponse = MovieDetailsResponseSchema.parse(responseJson);
-        const movie = {
+
+        const movie: MovieDetails = {
             id: movieResponse.id,
             title: movieResponse.title,
             backdropUrl: getBackdropUrl(movieResponse.backdrop_path),
@@ -145,7 +165,27 @@ export async function getMovieById(
                 movieResponse.tagline ||
                 `${movieResponse.overview.substring(0, 50)}...`,
             genres: movieResponse.genres,
+            rating: movieResponse.vote_average,
+            votes: movieResponse.vote_count,
+            year: movieResponse.release_date.getFullYear(),
+            runtime: formatMinutes(movieResponse.runtime),
+            originalLanguage: movieResponse.original_language.toUpperCase(),
+            overview: movieResponse.overview,
+            budget: formatCurrency(movieResponse.budget),
+            revenue: formatCurrency(movieResponse.revenue),
+            productionCompanies: movieResponse.production_companies.map(
+                (pc) => ({
+                    id: pc.id,
+                    name: pc.name,
+                    originCountry: pc.origin_country,
+                }),
+            ),
+            status: movieResponse.status,
+            originalTitle: movieResponse.original_title,
+            releaseDate: formatDate(movieResponse.release_date),
+            homepage: movieResponse.homepage,
         };
+
         return [movie, null];
     } catch (err) {
         return [null, err as Error];
@@ -161,6 +201,7 @@ export async function getPopularMovies(): Promise<
         );
         const responseJson = await response.json();
         const moviesResponse = MoviesInfoResponseSchema.parse(responseJson);
+
         const movies = moviesResponse.results.map((m) => ({
             id: m.id,
             title: m.title,
@@ -171,6 +212,7 @@ export async function getPopularMovies(): Promise<
             rating: m.vote_average,
             year: m.release_date.getFullYear(),
         }));
+
         return [movies, null];
     } catch (err) {
         return [null, err as Error];
