@@ -51,3 +51,5 @@ bin/cmd.sh npm install
 - worked on html by adding new components and used mocked data to display the components
 - added data access and basic movies retrieval from the api - no security
 checks, error handling, rate limiting, nothing! (this is to test the visuals)
+- added movie details page
+- added movie filtering (only filters results retrieved from the server)

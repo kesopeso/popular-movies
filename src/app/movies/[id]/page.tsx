@@ -1,4 +1,4 @@
-import { BackButton } from '@/components/back-button';
+import { BackButton } from '@/components/movie-details/back-button';
 import { MovieAdditionalInfo } from '@/components/movie-details/movie-additional-info';
 import { MovieFinancialInfo } from '@/components/movie-details/movie-financial-info';
 import { MovieHeaderBackdrop } from '@/components/movie-details/movie-header-backdrop';

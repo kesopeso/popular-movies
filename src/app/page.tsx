@@ -1,5 +1,6 @@
 import { MovieGrid } from '@/components/movies-list/movie-grid';
-import { SearchBar } from '@/components/search-bar';
+import { MoviesProvider } from '@/components/movies-list/movies-provider';
+import { SearchBar } from '@/components/movies-list/search-bar';
 import { ThemeToggler } from '@/components/theme/theme-toggler';
 import { getPopularMovies } from '@/repositories/movie-repository';
 
@@ -26,17 +27,19 @@ export default async function Home() {
                 </p>
             </header>
 
-            <div className="mx-auto mb-12 max-w-2xl">
-                <SearchBar />
-            </div>
+            <MoviesProvider initialMovies={movies}>
+                <div className="mx-auto mb-12 max-w-2xl">
+                    <SearchBar />
+                </div>
 
-            <section>
-                <h2 className="mb-6 text-2xl font-semibold text-foreground">
-                    Popular Movies
-                </h2>
+                <div>
+                    <h2 className="mb-6 text-2xl font-semibold text-foreground">
+                        Popular Movies
+                    </h2>
 
-                <MovieGrid movies={movies} />
-            </section>
+                    <MovieGrid />
+                </div>
+            </MoviesProvider>
         </div>
     );
 }
