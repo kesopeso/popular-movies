@@ -1,6 +1,9 @@
 services:
   popular_movies:
-    image: node:25.2.1-alpine3.22
+    image: popular-movies-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: popular_movies
     restart: always
     ports:

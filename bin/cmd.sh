@@ -12,4 +12,4 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-docker run --rm -i -t --rm -u $(id -u):$(id -g) -v $(pwd):/app -w /app node:25.2.1-alpine3.22 "$@"
+docker compose run --rm -i -u $(id -u):$(id -g) -v $(pwd):/app -w /app popular_movies "$@"
