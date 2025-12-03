@@ -9,6 +9,8 @@ import { MovieStats } from '@/components/movie-details/movie-stats';
 import { ThemeToggler } from '@/components/theme/theme-toggler';
 import { getMovieById } from '@/repositories/movie-repository';
 
+export const dynamic = 'force-dynamic';
+
 type MovieDetailsProps = {
     params: Promise<{ id: number }>;
 };

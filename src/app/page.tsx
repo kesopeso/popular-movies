@@ -4,6 +4,8 @@ import { SearchBar } from '@/components/movies-list/search-bar';
 import { ThemeToggler } from '@/components/theme/theme-toggler';
 import { getPopularMovies } from '@/repositories/movie-repository';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
     const [movies, err] = await getPopularMovies();
 

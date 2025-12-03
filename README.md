@@ -21,6 +21,9 @@ above installed.
 
 Cd into the project's root folder and use the following commands for the development:
 
+- copy .env.example file as .env or .env.local and modify it with appropriate
+variables
+
 - starting the development server
 
 ```bash

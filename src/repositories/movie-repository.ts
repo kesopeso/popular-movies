@@ -1,4 +1,4 @@
-import { tmdbApiAuthToken, tmdbApiBaseUrl } from '@/lib/env';
+import { getEnv } from '@/lib/env';
 import { formatCurrency, formatDate } from '@/lib/i18n';
 import { formatMinutes } from '@/lib/time';
 import { getGenreNameById } from '@/repositories/genres-repository';
@@ -220,6 +220,9 @@ export async function getPopularMovies(): Promise<
 }
 
 function fetchFromTmdbApi(path: string) {
+    const tmdbApiBaseUrl = getEnv('TMDB_API_BASE_URL');
+    const tmdbApiAuthToken = getEnv('TMDB_API_AUTH_TOKEN');
+
     return fetch(`${tmdbApiBaseUrl}${path}`, {
         headers: {
             Authorization: `Bearer ${tmdbApiAuthToken}`,
