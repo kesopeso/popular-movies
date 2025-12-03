@@ -63,3 +63,32 @@ checks, error handling, rate limiting, nothing! (this is to test the visuals)
 - added movie details page
 - added movie filtering (only filters results retrieved from the server)
 - added production docker configuration
+
+## Reflection
+
+I managed to implement all basic requirements:
+
+- homepage with movies grid
+- search bar that filters through available movies
+- movie details page with more info about the movie
+- responsive design
+- typescript used for development
+- docker for easier development / deployment across different environments
+
+Improvements i tend to implement in the future:
+
+- caching (adding expiry headers so clients don't refetch pages, caching pages
+on the server so that new clients receive cached versions, adding cache to movies
+repository)
+- bulletproofing api requests to external services (tmdb): retries, circuit
+breakers, timeouts, fallbacks, rate limiting,...
+- adding tests to the project!!! (currently project is small, but it may start
+growing quickly)
+- introducing local database so no unnecessary external calls are made
+- adding background service for retrieving data and storing it locally
+- adding skeleton loaders on resource heavy objects (images for instance)
+- saving images locally and saving multiple image sizes
+- improving image tags to use different sizes on different devices
+- adding load more movies button at the bottom of movies list
+- adding table display as well (only grid display is available currently)
+- adding display filters (genre, year, language,...)
