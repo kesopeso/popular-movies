@@ -1,5 +1,11 @@
 # Popular movies app
 
+## Author
+
+Đorđe Kesić <dordekesic.keso@gmail.com>
+
+## About
+
 This application is a simple movie browser built using
 The Movie Database (TMDb) API. It displays a list of currently popular movies
 on the home page, with a search bar at the top for quickly finding a specific
