@@ -1,14 +1,12 @@
 services:
   popular_movies:
-    image: popular-movies-dev
+    image: popular-movies-prod
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: popular_movies
+    container_name: popular_movies_prod
     restart: always
     ports:
       - "3000:3000"
-    volumes:
-      - ./:/app
-    working_dir: /app
-    command: ["npm", "run", "dev"]
+    env_file:
+      - .env.production

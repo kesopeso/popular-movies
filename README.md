@@ -56,3 +56,4 @@ bin/cmd.sh npm install
 checks, error handling, rate limiting, nothing! (this is to test the visuals)
 - added movie details page
 - added movie filtering (only filters results retrieved from the server)
+- added production docker configuration

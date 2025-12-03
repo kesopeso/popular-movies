@@ -12,4 +12,11 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-docker compose run --rm -i -u $(id -u):$(id -g) -v $(pwd):/app -w /app popular_movies "$@"
+docker compose -f compose.dev.yaml \
+    run \
+        --rm \
+        -i \
+        -u $(id -u):$(id -g) \
+        -v $(pwd):/app \
+        -w /app \
+            popular_movies "$@"

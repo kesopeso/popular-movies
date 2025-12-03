@@ -4,11 +4,11 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR/.."
 
-# Check if node_modules exists in the project root, if not run npm install
-if [ ! -d "node_modules" ]; then
-  bin/cmd.sh npm install
+if [ ! -f ".env.production" ]; then
+    echo "Error: .env.production file is missing"
+    exit 1
 fi
 
-docker compose -f compose.dev.yaml up -d
+docker compose up -d --build
 
 echo "App is available at: http://localhost:3000"
